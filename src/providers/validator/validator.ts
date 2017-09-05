@@ -8,6 +8,17 @@ export class ValidatorProvider {
     console.log('Hello ValidatorProvider Provider');
   }
 
+  structureQuestions(questions){
+    questions.map(question=>{
+      let correctAnswer = [];
+      question.options.map(option=>{
+        if ( question.correctAnswer.indexOf(option.optionValue) >= 0 )
+          correctAnswer.push(option.optionValue);
+      })
+      question.correctAnswer = correctAnswer.toString();
+    })
+  }
+
   validateOptions(options, i, questionNo){
     if (options.length === 0) {
       return {

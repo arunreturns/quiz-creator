@@ -1,3 +1,4 @@
+import { ListPreviewPage } from './../list-preview/list-preview';
 import { Component } from '@angular/core';
 
 import { AddQuizPage } from '../add-quiz/add-quiz';
@@ -8,7 +9,7 @@ import { QuizListPage } from '../quiz-list/quiz-list';
 })
 export class TabsPage {
 
-  tab1Root = AddQuizPage;
+  tab1Root = ListPreviewPage;
   tab2Root = QuizListPage;
 
   constructor() {

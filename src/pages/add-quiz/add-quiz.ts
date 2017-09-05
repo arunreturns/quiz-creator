@@ -96,6 +96,7 @@ export class AddQuizPage {
     let validationStatus = this.validatorProvider.validateQuestions(this.questions);
     let { useSlidingQuiz } = this.quizProvider.quizSettings;
     if (validationStatus === true) {
+      this.validatorProvider.structureQuestions(this.questions);
       let previewPage = useSlidingQuiz.value ? SlidePreviewPage : ListPreviewPage
       this.navCtrl.push(previewPage, {
         questions: this.questions
@@ -108,6 +109,7 @@ export class AddQuizPage {
   saveQuiz(){
     let validationStatus = this.validatorProvider.validateQuestions(this.questions);
     if (validationStatus === true) {
+      this.validatorProvider.structureQuestions(this.questions);
       let quizData = {
         ...this.quizForm.value,
         quizSettings: this.quizProvider.quizSettings,
@@ -116,6 +118,7 @@ export class AddQuizPage {
       console.log("Saving Quiz", quizData);
       this.quizProvider.quizList.push(quizData)
       this.questions = [];
+      this.quizForm.reset();
     } else {
       this.handleError(validationStatus);
     }

@@ -3,4 +3,5 @@ export class Option {
   optionName: string;
   optionValue: string;
   optionImage: string;
+  errMsg: string;
 }
