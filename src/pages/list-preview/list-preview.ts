@@ -17,7 +17,7 @@ export class ListPreviewPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public validatorProvider: ValidatorProvider) {
     console.log(navParams);
     console.log(JSON.stringify(navParams.data.questions))
-    this.questions = JSON.parse(JSON.stringify(Questions)) //navParams.data.questions;
+    this.questions = navParams.data.questions; //JSON.parse(JSON.stringify(Questions))  
     validatorProvider.structureQuestions(this.questions);
     this.quizResultAry = Array(this.questions.length).fill(null);
     console.log(this.quizResultAry)
