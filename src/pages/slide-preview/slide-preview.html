@@ -1,0 +1,47 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>Preview Quiz</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-slides>
+		<ion-slide *ngFor="let question of questions">
+			<h2>{{ question.questionNo }}</h2>
+			<ion-card padding>
+				<ion-card-content>
+					<ion-list radio-group *ngIf="!question.isMultipleChoice" [(ngModel)]="question.selectedAnswer">
+						<ion-note no-lines>{{question.questionTitle}}</ion-note>
+						<ion-item text-start no-lines *ngFor="let option of question.options; let i = index">
+							<ion-label>{{option.optionValue}}</ion-label>
+							<ion-radio item-start value="{{option.optionValue}}"></ion-radio>
+						</ion-item>
+					</ion-list>
+
+					<ion-list *ngIf="question.isMultipleChoice">
+						<ion-item no-lines>{{question.questionTitle}}</ion-item>
+						<ion-item text-start no-lines *ngFor="let option of question.options; let i = index">
+							<ion-label>{{option.optionValue}}</ion-label>
+							<ion-checkbox item-start (click)="selectOption(question, option.optionValue)">{{option.optionValue}}</ion-checkbox>
+						</ion-item>
+					</ion-list>
+				</ion-card-content>
+			</ion-card>
+			<div text-center>
+				<button ion-button icon-left (click)="moveToQuestion(-1)" [disabled]="slides.isBeginning()">
+          <ion-icon name="arrow-dropleft"></ion-icon>
+          Prev Question
+        </button>
+				<button ion-button icon-right (click)="moveToQuestion(1)" [disabled]="slides.isEnd()">
+          Next Question
+          <ion-icon name="arrow-dropright"></ion-icon>
+        </button>
+			</div>
+			<div text-center padding>
+				<button ion-button round color="secondary">Submit Quiz</button>
+			</div>
+		</ion-slide>
+
+	</ion-slides>
+
+</ion-content>

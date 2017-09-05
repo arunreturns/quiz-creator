@@ -1,0 +1,43 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>Quiz List</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item-sliding *ngFor="let quiz of quizList; let quizIndex = i">
+      <ion-item-options side="left">
+        <button ion-button color="dark" (click)="editQuiz(quiz)">
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </button>
+        <button ion-button color="danger" (click)="deleteQuiz(quizIndex)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+      <ion-item>
+        <h2>Quiz Name: {{ quiz.quizName }}</h2>
+        <h3 margin-top>Number of Questions: {{ quiz.numQuestions }}</h3>
+        <div margin-top>
+          <span class="icon-attr" padding *ngFor="let setting of quiz.quizSettings | keys">
+            <ion-icon color="{{quiz.quizSettings[setting].value ? 'secondary': 'danger'}}" 
+                      name='{{ quiz.quizSettings[setting].icon }}'></ion-icon>
+            {{ quiz.quizSettings[setting].text }}
+          </span>
+        </div>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="primary" (click)="previewQuiz(quiz)">
+          <ion-icon name="eye"></ion-icon>
+          Preview
+        </button>
+        <button ion-button color="secondary" (click)="publishQuiz(quiz)">
+          <ion-icon name="send"></ion-icon>
+          Publish
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
